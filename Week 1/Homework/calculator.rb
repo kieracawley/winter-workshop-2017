@@ -1,7 +1,8 @@
-if ARGV.length == 3
+if ARGV.length == 2
 	amount_of_money = ARGV[0].to_f
 	amount_of_months = ARGV[1].to_f
-	intrest_rate = ARGV[2].to_f
+	interest_rate = rand(5..20).to_f
+	puts "Interest Rate: " + interest_rate.to_i.to_s + "%"
 	[*0..amount_of_months.to_i].each do |i|
 		amount_of_dollars = amount_of_money.to_i
 		amount_of_cents = ((amount_of_money % 1) * 100).to_i
@@ -15,8 +16,8 @@ if ARGV.length == 3
 			time_passed = "1 month: "
 		end
 		puts time_passed + "$" + amount_of_dollars_string + "." + amount_of_cents_string
-		amount_of_money += (amount_of_money * (intrest_rate / 100))
+		amount_of_money += (amount_of_money * (interest_rate / 100))
 	end
 else
-	puts "Enter 3 arguments in the order (amount of money, amount of months, interest rate)"
+	puts "Enter 2 arguments in the order (amount of money, amount of months)"
 end

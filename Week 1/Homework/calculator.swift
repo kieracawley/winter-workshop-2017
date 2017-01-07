@@ -1,7 +1,9 @@
-if(CommandLine.arguments.count == 4){
+import Foundation
+if(CommandLine.arguments.count == 3){
 	var amountOfMoney:Float =  Float(CommandLine.arguments[1])!
 	var amountOfMonths:Float =  Float(CommandLine.arguments[2])!
-	var intrestRate:Float =  Float(CommandLine.arguments[3])!
+	var interestRate:Float =  Float(arc4random_uniform(15) + 5)
+	print("Interest Rate: " + String(Int(interestRate)) + "%")
 	for i in 0...Int(amountOfMonths){
 		let amountOfDollars = Int(amountOfMoney)
 		let amountOfCents = Int((amountOfMoney.truncatingRemainder(dividingBy:1.0)) * 100.0)
@@ -16,9 +18,9 @@ if(CommandLine.arguments.count == 4){
 		}
 		let fullMoneyString = "$" + amountOfDollarsString + "." + amountOfCentsString
 		print(timePassed + fullMoneyString)
-		amountOfMoney = amountOfMoney + (amountOfMoney * (intrestRate/100))
+		amountOfMoney = amountOfMoney + (amountOfMoney * (interestRate/100))
 	}
 }
 else{
-	print("Enter 3 arguments in the order (amount of money, amount of months, interest rate)")
+	print("Enter 2 arguments in the order (amount of money, amount of months)")
 }
