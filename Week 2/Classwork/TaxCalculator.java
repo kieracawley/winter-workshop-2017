@@ -14,6 +14,6 @@ public class TaxCalculator{
 		double tip = Double.parseDouble(scanner.next().replaceAll("[^\\d.]", ""));
 		double totalCost = (double) (price * amount) + (price * amount * 0.08875) + (price * amount * (tip/100));
 		int hours = (int) Math.ceil(totalCost/7.7);
-		System.out.print("It will take " + hours + " hours of working." + System.getProperty("line.separator"));
+		System.out.print("It will take " + hours + " hour(s) of working." + System.getProperty("line.separator"));
 	}
 }

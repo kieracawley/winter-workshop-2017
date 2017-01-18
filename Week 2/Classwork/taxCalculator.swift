@@ -40,4 +40,4 @@ let filteredTipFloat = Float(String(filteredTipCharacters))!
 
 let totalCost = (filteredPriceFloat * filteredQuantityFloat) * ((100 + 8.875 + filteredTipFloat)/100)
 let hours = Int(totalCost / 7.7) + 1
-print("You will have to work for " + String(hours) + " hours.")
+print("You will have to work for " + String(hours) + " hour(s).")
