@@ -34,7 +34,7 @@ public class Hangman{
 				avalableLetters.add(String.valueOf(character));
 			}
 		}
-		game(randomWord, guessedString, avalableLetters, 5, new ArrayList());
+		game(randomWord, guessedString, avalableLetters, 10, new ArrayList());
 	}
 	public static void game(String word, String guessedString, ArrayList letters, int guesses, ArrayList guessedLetters){
 		Scanner scanner = new Scanner(System.in);

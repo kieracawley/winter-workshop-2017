@@ -92,4 +92,4 @@ func game(word:String, guessedString:String, letters:[String], guesses:Int, gues
 	}
 }
 
-game(word:randomWord, guessedString:guessedString, letters:letters, guesses:5, guessedLetters:[])
+game(word:randomWord, guessedString:guessedString, letters:letters, guesses:10, guessedLetters:[])
