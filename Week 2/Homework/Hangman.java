@@ -112,7 +112,7 @@ public class Hangman{
 		String finalString = "";
 		for(int i = 0; i < list.size(); i++){
 			if(i == list.size() - 1 && list.size() > 1){
-				finalString = finalString + "and " + String.valueOf(list.get(i));
+				finalString = finalString + String.valueOf(list.get(i));
 			}
 			else if(list.size() == 1 || list.size() == 2){
 				finalString = finalString + String.valueOf(list.get(i)) + " ";

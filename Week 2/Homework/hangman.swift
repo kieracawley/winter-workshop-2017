@@ -29,7 +29,7 @@ func arrayToString(array:[String]) -> String{
 			finalString = finalString + string + " "
 		}
 		else if (index == array.count - 1){
-			finalString = finalString + "and " + string
+			finalString = finalString + string
 		}
 		else{
 			finalString = finalString + string + ", "
