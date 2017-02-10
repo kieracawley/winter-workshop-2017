@@ -1,39 +1,33 @@
 require 'colorize'
-def placeShip(originalBoard)
+
+def placeShip(originalBoard, length)
 	board = originalBoard
 	row = rand(10)
 	coloumn = rand(10)
 	if rand(2) == 0
 		if coloumn < 5
-			board[row][coloumn] = "S".colorize(:light_cyan)
-			board[row][coloumn + 1] = "S".colorize(:light_cyan)
-			board[row][coloumn + 2] = "S".colorize(:light_cyan)
-			board[row][coloumn + 3] = "S".colorize(:light_cyan)
-			board[row][coloumn + 4] = "S".colorize(:light_cyan)
+			(0...length).each do |num|
+				board[row][coloumn + num] = "S".colorize(:light_cyan)
+			end
 		else
-			board[row][coloumn] = "S".colorize(:light_cyan)
-			board[row][coloumn - 1] = "S".colorize(:light_cyan)
-			board[row][coloumn - 2] = "S".colorize(:light_cyan)
-			board[row][coloumn - 3] = "S".colorize(:light_cyan)
-			board[row][coloumn - 4] = "S".colorize(:light_cyan)
+			(0...length).each do |num|
+				board[row][coloumn - num] = "S".colorize(:light_cyan)
+			end
 		end
 	else
 		if row < 5
-			board[row][coloumn] = "S".colorize(:light_cyan)
-			board[row + 1][coloumn] = "S".colorize(:light_cyan)
-			board[row + 2][coloumn] = "S".colorize(:light_cyan)
-			board[row + 3][coloumn] = "S".colorize(:light_cyan)
-			board[row + 4][coloumn] = "S".colorize(:light_cyan)
+			(0...length).each do |num|
+				board[row + num][coloumn] = "S".colorize(:light_cyan)
+			end
 		else
-			board[row][coloumn] = "S".colorize(:light_cyan)
-			board[row - 1][coloumn] = "S".colorize(:light_cyan)
-			board[row - 2][coloumn] = "S".colorize(:light_cyan)
-			board[row - 3][coloumn] = "S".colorize(:light_cyan)
-			board[row - 4][coloumn] = "S".colorize(:light_cyan)
+			(0...length).each do |num|
+				board[row - num][coloumn] = "S".colorize(:light_cyan)
+			end
 		end
 	end
 	return board
 end
+
 def createBoard(ships)
 	newBoard = Array.new()
 	(1..10).each do |index|
@@ -143,4 +137,5 @@ def game(board1, board2, board3)
 	end
 	game(playerBoard, computerBoard, computerDisplayBoard)
 end
+
 game(createBoard(1), createBoard(1), createBoard(0))
