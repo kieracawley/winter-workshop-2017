@@ -37,7 +37,7 @@ def createBoard(ships)
 		end
 	end
 	(0...ships).each do |a|
-		newBoard = placeShip(newBoard)
+		newBoard = placeShip(newBoard, 5)
 	end
 	return newBoard
 end
