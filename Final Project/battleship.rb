@@ -1,27 +1,72 @@
 require 'colorize'
 
-def placeShip(originalBoard, length)
-	board = originalBoard
-	row = rand(10)
-	coloumn = rand(10)
-	if rand(2) == 0
-		if coloumn < 5
-			(0...length).each do |num|
-				board[row][coloumn + num] = "S".colorize(:light_cyan)
+def isValid(range, board, isAcross, row, coloumn)
+	isValid = true
+	range.each do |num|
+		if isAcross
+			if coloumn < 5
+				if board[row][coloumn + num] == "S".colorize(:light_cyan)
+					isValid = false
+				end
+			else
+				if board[row][coloumn - num] == "S".colorize(:light_cyan)
+					isValid = false
+				end
 			end
 		else
-			(0...length).each do |num|
-				board[row][coloumn - num] = "S".colorize(:light_cyan)
+			if row < 5
+				if board[row + num][coloumn] == "S".colorize(:light_cyan)
+					isValid = false
+				end
+			else
+				if board[row - num][coloumn] == "S".colorize(:light_cyan)
+					isValid = false
+				end
 			end
 		end
-	else
-		if row < 5
-			(0...length).each do |num|
-				board[row + num][coloumn] = "S".colorize(:light_cyan)
+	end
+	return isValid
+end
+
+def placeShip(originalBoard, length)
+	board = originalBoard
+	row = 0
+	coloumn = 0
+	isValidShip = false
+	while !isValidShip
+		row = rand(10)
+		coloumn = rand(10)
+		if rand(2) == 0
+			if coloumn < 5
+				if isValid((0...length), board, true, row, coloumn)
+					(0...length).each do |num|
+						board[row][coloumn + num] = "S".colorize(:light_cyan)
+						isValidShip = true
+					end
+				end
+			else
+				if isValid((0...length), board, true, row, coloumn)
+					(0...length).each do |num|
+						board[row][coloumn - num] = "S".colorize(:light_cyan)
+						isValidShip = true
+					end
+				end
 			end
 		else
-			(0...length).each do |num|
-				board[row - num][coloumn] = "S".colorize(:light_cyan)
+			if row < 5
+				if isValid((0...length), board, false, row, coloumn)
+					(0...length).each do |num|
+						board[row + num][coloumn] = "S".colorize(:light_cyan)
+						isValidShip = true
+					end
+				end
+			else
+				if isValid((0...length), board, false, row, coloumn)
+					(0...length).each do |num|
+						board[row - num][coloumn] = "S".colorize(:light_cyan)
+						isValidShip = true
+					end
+				end
 			end
 		end
 	end
@@ -36,8 +81,9 @@ def createBoard(ships)
 			newBoard[index - 1].push("O".colorize(:white))
 		end
 	end
+	lengths = [2,3,4,4,5]
 	(0...ships).each do |a|
-		newBoard = placeShip(newBoard, 5)
+		newBoard = placeShip(newBoard, lengths[a])
 	end
 	return newBoard
 end
@@ -138,4 +184,4 @@ def game(board1, board2, board3)
 	game(playerBoard, computerBoard, computerDisplayBoard)
 end
 
-game(createBoard(1), createBoard(1), createBoard(0))
+game(createBoard(5), createBoard(5), createBoard(0))
