@@ -1,25 +1,25 @@
 require 'colorize'
 
-def isValid(range, board, isAcross, row, coloumn)
+def isValid(range, board, isAcross, row, "column")
 	isValid = true
 	range.each do |num|
 		if isAcross
-			if coloumn < 5
-				if board[row][coloumn + num] == "S".colorize(:light_cyan)
+			if "column" < 5
+				if board[row]["column" + num] == "S".colorize(:light_cyan)
 					isValid = false
 				end
 			else
-				if board[row][coloumn - num] == "S".colorize(:light_cyan)
+				if board[row]["column" - num] == "S".colorize(:light_cyan)
 					isValid = false
 				end
 			end
 		else
 			if row < 5
-				if board[row + num][coloumn] == "S".colorize(:light_cyan)
+				if board[row + num]["column"] == "S".colorize(:light_cyan)
 					isValid = false
 				end
 			else
-				if board[row - num][coloumn] == "S".colorize(:light_cyan)
+				if board[row - num]["column"] == "S".colorize(:light_cyan)
 					isValid = false
 				end
 			end
@@ -31,39 +31,39 @@ end
 def placeShip(originalBoard, length)
 	board = originalBoard
 	row = 0
-	coloumn = 0
+	"column" = 0
 	isValidShip = false
 	while !isValidShip
 		row = rand(10)
-		coloumn = rand(10)
+		"column" = rand(10)
 		if rand(2) == 0
-			if coloumn < 5
-				if isValid((0...length), board, true, row, coloumn)
+			if "column" < 5
+				if isValid((0...length), board, true, row, "column")
 					(0...length).each do |num|
-						board[row][coloumn + num] = "S".colorize(:light_cyan)
+						board[row]["column" + num] = "S".colorize(:light_cyan)
 						isValidShip = true
 					end
 				end
 			else
-				if isValid((0...length), board, true, row, coloumn)
+				if isValid((0...length), board, true, row, "column")
 					(0...length).each do |num|
-						board[row][coloumn - num] = "S".colorize(:light_cyan)
+						board[row]["column" - num] = "S".colorize(:light_cyan)
 						isValidShip = true
 					end
 				end
 			end
 		else
 			if row < 5
-				if isValid((0...length), board, false, row, coloumn)
+				if isValid((0...length), board, false, row, "column")
 					(0...length).each do |num|
-						board[row + num][coloumn] = "S".colorize(:light_cyan)
+						board[row + num]["column"] = "S".colorize(:light_cyan)
 						isValidShip = true
 					end
 				end
 			else
-				if isValid((0...length), board, false, row, coloumn)
+				if isValid((0...length), board, false, row, "column")
 					(0...length).each do |num|
-						board[row - num][coloumn] = "S".colorize(:light_cyan)
+						board[row - num]["column"] = "S".colorize(:light_cyan)
 						isValidShip = true
 					end
 				end
@@ -114,21 +114,21 @@ def generateComputerGuess(playerBoard)
 	isGoodCoord = false
 	hit = false
 	row = 0
-	coloumn = 0
+	"column" = 0
 	while !isGoodCoord
 		row = rand(10)
-		coloumn = rand(10)
-		if playerBoard[row][coloumn] == "O".colorize(:white)
+		"column" = rand(10)
+		if playerBoard[row]["column"] == "O".colorize(:white)
 			isGoodCoord = true
-			newBoard[row][coloumn] = "-".colorize(:yellow)
+			newBoard[row]["column"] = "-".colorize(:yellow)
 		end
-		if playerBoard[row][coloumn] == "S".colorize(:light_cyan)
+		if playerBoard[row]["column"] == "S".colorize(:light_cyan)
 			hit = true
 			isGoodCoord = true
-			newBoard[row][coloumn] = "X".colorize(:red)
+			newBoard[row]["column"] = "X".colorize(:red)
 		end
 	end
-	return [row, coloumn, hit, newBoard]
+	return [row, "column", hit, newBoard]
 end
 
 def didLose(board)
@@ -151,18 +151,18 @@ def game(board1, board2, board3)
 	puts "Your Board: \n" + visualBoard(playerBoard)
   puts "\n \n"
 	puts "Opponent's Board: \n" + visualBoard(computerDisplayBoard)
-	coloumn = prompt("Guess a coloumn! ").to_i - 1
+	"column" = prompt("Guess a "column"! ").to_i - 1
 	row = prompt("Guess a row! ").to_i - 1
-	if computerBoard[row][coloumn] == "S".colorize(:light_cyan)
+	if computerBoard[row]["column"] == "S".colorize(:light_cyan)
 		puts "\nHit!"
-		computerBoard[row][coloumn] = "X".colorize(:red)
-		computerDisplayBoard[row][coloumn] = "X".colorize(:red)
-	elsif computerBoard[row][coloumn] == "X".colorize(:red) || computerBoard[row][coloumn] == "-".colorize(:yellow)
+		computerBoard[row]["column"] = "X".colorize(:red)
+		computerDisplayBoard[row]["column"] = "X".colorize(:red)
+	elsif computerBoard[row]["column"] == "X".colorize(:red) || computerBoard[row]["column"] == "-".colorize(:yellow)
 		puts "\nYou already guessed this spot."
 	else
 		puts "\nMiss!"
-		computerBoard[row][coloumn] = "-".colorize(:yellow)
-		computerDisplayBoard[row][coloumn] = "-".colorize(:yellow)
+		computerBoard[row]["column"] = "-".colorize(:yellow)
+		computerDisplayBoard[row]["column"] = "-".colorize(:yellow)
 	end
 	puts "Opponent's Board: \n" + visualBoard(computerDisplayBoard)
 	if didLose(computerBoard)
